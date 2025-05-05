@@ -1,0 +1,44 @@
+Subclasses should be replacable by their superclass
+
+That means that, given a class B that is a subclass of class A, we should be able to give any object of class B to any method that expects an object of class A.
+
+
+class Bird {
+    public void fly() {
+        System.out.println("Bird is flying");
+    }
+}
+
+class Sparrow extends Bird {
+    @Override
+    public void fly() {
+        System.out.println("Sparrow is flying");
+    }
+}
+
+class Penguin extends Bird {
+    @Override
+    public void fly() {
+        throw new UnsupportedOperationException("Penguins can't fly");
+    }
+}
+
+This is wrong, Penguins can not fly.
+
+abstract class Bird {
+    public abstract void move();
+}
+
+class Sparrow extends Bird {
+    @Override
+    public void move() {
+        System.out.println("Sparrow is flying");
+    }
+}
+
+class Penguin extends Bird {
+    @Override
+    public void move() {
+        System.out.println("Penguin is swimming");
+    }
+}
