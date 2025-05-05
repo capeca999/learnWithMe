@@ -1,0 +1,59 @@
+Basically, not use a big interface and make all use all methods, that maybe they do not need. It is better to use smaller interfaces.
+
+interface Worker {
+    void work();
+    void eat();
+}
+
+class Developer implements Worker {
+    @Override
+    public void work() {
+        System.out.println("Developer is coding.");
+    }
+
+    @Override
+    public void eat() {
+        System.out.println("Developer is eating.");
+    }
+}
+
+class Robot implements Worker {
+    @Override
+    public void work() {
+        System.out.println("Robot is working.");
+    }
+
+    @Override
+    public void eat() {
+        throw new UnsupportedOperationException("Robot does not eat.");
+    }
+}
+
+
+
+interface Workable {
+    void work();
+}
+
+interface Eatable {
+    void eat();
+}
+
+class Developer implements Workable, Eatable {
+    @Override
+    public void work() {
+        System.out.println("Developer is coding.");
+    }
+
+    @Override
+    public void eat() {
+        System.out.println("Developer is eating.");
+    }
+}
+
+class Robot implements Workable {
+    @Override
+    public void work() {
+        System.out.println("Robot is working.");
+    }
+}
