@@ -1,1 +1,31 @@
-ReadmeJava
+# Java Best Practices and Reference Snippets
+
+This directory contains a curated collection of Java code examples, design patterns, and utility classes that I consider useful, reusable, or worth preserving. It is intended as a personal reference to support clean architecture, maintainability, and consistency across Java projects.
+
+## Purpose
+
+Over time, certain patterns, utility functions, and validation strategies repeat themselves across projects. This repository acts as a centralized space to store those elements with clear examples, so they can be reused or refined in future work.
+
+## Structure
+
+- **Validation**: Centralized validation logic for commands or value objects.
+- **Domain patterns**: Examples of command handlers, aggregates, repositories, etc.
+- **Exception handling**: Structured custom exceptions with clear boundaries.
+- **Testing**: Unit test patterns, mocking techniques, and test data builders.
+- **Documentation**: Headers, templates, or conventions for code clarity and Git usage.
+
+## Contribution
+
+This repository is maintained as a personal toolkit. Contributions are welcome in the form of ideas or critiques, but the goal is to remain selective and focused on high-quality, reusable patterns.
+
+## Naming and formatting guidelines
+
+- File names should reflect their purpose, e.g. `DivisionTypeCommandValidator.java`.
+- Code blocks may include standardized headers such as:
+  
+  ```java
+  /* =========================================================================
+   * MODULE        : Division Types
+   * PURPOSE       : Centralized validation for command inputs
+   * CREATED BY    : [Your Name]
+   * ========================================================================= */
