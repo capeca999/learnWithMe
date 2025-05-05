@@ -1,0 +1,54 @@
+A class should have only one reason to change and to be created.
+
+
+class User {
+    private String name;
+    private String email;
+
+    public User(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
+
+    public void saveUser() {
+        System.out.println("User saved to database.");
+    }
+
+    public void sendEmail(String message) {
+        System.out.println("Email sent to " + email + " with message: " + message);
+    }
+
+    // Getters and setters
+}
+
+This is clearly wrong, this class can save a User and also send an Email, this violates the S of SOLID
+
+
+
+class User {
+    private String name;
+    private String email;
+
+    public User(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
+
+    // Getters and setters
+}
+
+class UserRepository {
+    public void saveUser(User user) {
+        System.out.println("User " + user.getName() + " saved to database.");
+    }
+}
+
+class EmailService {
+    public void sendEmail(User user, String message) {
+        System.out.println("Email sent to " + user.getEmail() + " with message: " + message);
+    }
+}
+
+
+This is far better, because we have a UserRepository (On another file of course) that can persist a User
+Then we have a service of Emails, that class should manage all operations related to email handling.
