@@ -1,0 +1,110 @@
+The porpuse of this is to put all the logic about model-fields validation directly to the model
+
+Here we are going to put an example
+
+/* ========================================================================================
+ * CODE STARTS HERE
+ * ----------------------------------------------------------------------------------------
+ * Módulo       : Java - ValueObjects
+ * Propósito    : To validate fields in a model directly on the model
+ * Autor        : [Francisco Manuel Pinazo Guna]
+ * Fecha        : [05-05-2025]
+ * Descripción  : Validate fields in a model directly on the model, this way we can be sure that the model is healthy.
+ * ======================================================================================== */
+
+package com.bcm.contrataciones.domain.model;
+
+import com.bcm.contrataciones.domain.command.CreateDivisionTypeCommand;
+import com.bcm.contrataciones.domain.command.UpdateDivisionTypeCommand;
+import com.bcm.contrataciones.domain.model.valueobject.DivisionTypeName;
+
+public class DivisionType {
+	
+	  private final Integer id;
+    private DivisionTypeName nombre;
+
+	protected DivisionType() {
+		this.id = null;
+		this.nombre = null;
+	}
+
+	
+	
+	public DivisionType(Integer id, String nombre) {
+		this.id = id;
+        this.nombre = new DivisionTypeName(nombre); 
+    }
+
+	public DivisionType(CreateDivisionTypeCommand command) {
+		this.id = null;
+        this.nombre = new DivisionTypeName(command.name()); 
+	}
+	
+
+	public Integer getId() {
+		return id;
+	}
+
+	public String getNombre() {
+        return nombre.value(); 
+	}
+
+	public void update(UpdateDivisionTypeCommand command) {
+        this.nombre = new DivisionTypeName(command.name()); 
+    }	
+	}
+	
+	
+	Here we can see the model of DivisionType, the Id can be final because id, on a normal use case can't and SHOULD not be edited or changed in any way
+  Well, in this case the name can be edited, so "nombre" is type "DivisionTypeName"
+
+  As you can see, we have a constructor of all fields, a constructor of only the name.
+
+  
+  Now, we are going to see DivisionTypeName
+
+
+
+/* ========================================================================================
+ * CODE STARTS HERE
+ * ----------------------------------------------------------------------------------------
+ * Módulo       : Java - ValueObjects
+ * Propósito    : To validate the fields in the model this is used on
+ * Autor        : [Francisco Manuel Pinazo Guna]
+ * Fecha        : [05-05-2025]
+ * Descripción  : Validate fields in a model directly on the model, this way we can be sure that the model is healthy.
+ * ======================================================================================== */
+
+
+package com.bcm.contrataciones.domain.model.valueobject;
+
+import java.util.Objects;
+
+import com.bcm.contrataciones.domain.exception.CreateDivisionTypeEmptyNameException;
+
+public class DivisionTypeName {
+
+	public String value;
+	
+	public DivisionTypeName(String value) {
+		this.value = value;
+		validate();
+	}
+	private void validate() {
+		if (Objects.isNull(this.value) || this.value.isEmpty()) {
+			throw new CreateDivisionTypeEmptyNameException("El nombre no puede estar vacío");
+		}
+	}
+	
+	public String value() {
+		return value;
+	}
+	
+}
+
+As you can see, name is really a String, but, when we are creating a DivisionType, the field DivisionTypeName has a validate method on the constructor.
+This validate method checks, in this case, that id is not null or empty
+
+
+Using this we have all the logic on the model.
+
