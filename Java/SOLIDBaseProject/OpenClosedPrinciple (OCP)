@@ -1,0 +1,80 @@
+Entities should be open for extension, but closed for modification.
+
+class Rectangle {
+    private double width;
+    private double height;
+
+    // Getters and setters
+}
+
+class Circle {
+    private double radius;
+
+    // Getters and setters
+}
+
+class AreaCalculator {
+    public double calculateArea(Object shape) {
+        if (shape instanceof Rectangle) {
+            Rectangle rectangle = (Rectangle) shape;
+            return rectangle.getWidth() * rectangle.getHeight();
+        } else if (shape instanceof Circle) {
+            Circle circle = (Circle) shape;
+            return Math.PI * circle.getRadius() * circle.getRadius();
+        }
+        return 0;
+    }
+}
+
+interface Shape {
+    double calculateArea();
+}
+
+class Rectangle implements Shape {
+    private double width;
+    private double height;
+
+    @Override
+    public double calculateArea() {
+        return width * height;
+    }
+
+    // Getters and setters
+}
+
+class Circle implements Shape {
+    private double radius;
+
+    @Override
+    public double calculateArea() {
+        return Math.PI * radius * radius;
+    }
+
+    // Getters and setters
+}
+
+
+class AreaCalculator {
+    public double calculateArea(Shape shape) {
+        return shape.calculateArea();
+    }
+}
+
+
+As we can see, the first example does not use any interfaces, what if we add a new shape? We would need to change almost all the class, this is bad.
+
+But, with this approach, there is a Shape class, that, in this case, has a method that dictates that if you implement me, you need to have a calculateArea method.
+
+Then, circle implements Shape, and rectangle implements Shape, then we put how we calculate the area.
+
+What if we want to add triangle shape?
+
+CHANGES TO BE MADE IF WE ARE NOT USING OCP
+
+1-Add new class
+2-MODIFY AreCalculator to add a new if, if it is a triangle, do this
+
+CHANGES TO BE MADE IF WE ARE USING OCP
+1-Add new class
+
+
