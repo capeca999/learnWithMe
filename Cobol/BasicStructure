@@ -1,0 +1,28 @@
+In order to create a cobol program you need this structure:
+
+IDENTIFICATION DIVISION.
+
+The division is used to identify basic information about the program.
+
+PROGRAM-ID. HELLO
+
+In this case, we are saying that the id for the program is HELLO
+
+ENVIRONMENT DIVISION.
+
+Here will be almost always empty. Cobol is meant to be used on many machines, so if there is a case that you need to put a difference between computers.
+
+DATA DIVISION.
+
+Hwew you will contain any data that the program operates on.
+
+PROCEDURE DIVISION.
+
+This is the heart of the program, basically the work intended by the programmer.
+
+This division contains two paragraphs:
+
+PROGRAM-BEGIN and PROGRAM-DONE
+
+
+Then STOP RUN. As it says, the program is stoped.
