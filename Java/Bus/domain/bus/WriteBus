@@ -1,0 +1,11 @@
+package strut_sdk.domain.bus;
+
+public interface WriteBus<T> {
+	
+	
+	void handle(T command);
+
+}
+
+
+It defines a contract in a write bus. It is used to execute commands.
