@@ -1,0 +1,30 @@
+Implements is with Interfaces, it is like a contract (THIS CLASS AGREES TO FOLLOW A CONTRACT DEFINED BY THE INTERFACE(s))
+
+
+implements – Implementing an interface
+You use implements when your class promises to implement methods defined by an interface.
+
+An interface is like a contract with method signatures only (no logic).
+
+A class can implement multiple interfaces.
+
+
+public interface Vehicle {
+    void drive();
+}
+
+public interface Electric {
+    void charge();
+}
+
+public class Tesla implements Vehicle, Electric {
+    @Override
+    public void drive() {
+        System.out.println("Driving silently");
+    }
+
+    @Override
+    public void charge() {
+        System.out.println("Charging battery");
+    }
+}
