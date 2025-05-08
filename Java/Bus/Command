@@ -1,0 +1,9 @@
+package com.bcm.strut_sdk.domain.command;
+
+public abstract class Command {
+
+}
+
+It is a base class for all the actions that modify the status of the system (CREATE, UPDATE, DELETE)
+
+This identify an object as a command.
