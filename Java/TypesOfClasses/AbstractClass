@@ -1,0 +1,47 @@
+An abstract class is a class that cannot be instantiated directly, and can contain abstract methods (without implementation) as well as regular methods (with code).
+It serves as a blueprint for other classes to inherit from
+
+USES
+
+To define a common base for relates classes.
+To share code across subclasses.
+To enforce certain methods to be implemented in child classes
+
+public abstract class Animal {
+    public void breathe() {
+        System.out.println("I’m breathing");
+    }
+
+    public abstract void makeSound(); // no implementation
+}
+
+
+
+
+public class Dog extends Animal {
+    @Override
+    public void makeSound() {
+        System.out.println("Woof woof");
+    }
+}
+
+public class Cat extends Animal {
+    @Override
+    public void makeSound() {
+        System.out.println("Meow");
+    }
+}
+
+Animal a = new Dog();    //  valid
+a.makeSound();           // "Woof woof"
+
+Animal b = new Animal(); //  ERROR: cannot instantiate abstract class
+
+                                  Abstract class    	                            Interface
+Can have attributes              	✅ Yes (including private)	                    ⚠️ Only constants (public static final)
+Methods with logic (code)	        ✅ Yes	                                        ✅ Since Java 8 (default methods)
+Multiple inheritance	            ❌ Only one abstract class	                    ✅ Can implement multiple interfaces
+Can be instantiated	              ❌ No	                                          ❌ No
+
+
+
