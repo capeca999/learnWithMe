@@ -1,0 +1,26 @@
+It is used with Classes or abstract classes
+
+This means that this class inherits from another class (Abstract or not)
+
+extends – Inheriting from a class
+You use extends when your class inherits from another class (abstract or concrete).
+
+You get its methods and properties (can override them).
+
+You can only extend one class (Java doesn’t support multiple inheritance).
+
+
+public abstract class Animal {
+    public void breathe() {
+        System.out.println("Breathing");
+    }
+
+    public abstract void makeSound();
+}
+
+public class Dog extends Animal {
+    @Override
+    public void makeSound() {
+        System.out.println("Woof");
+    }
+}
