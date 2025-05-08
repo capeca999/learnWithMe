@@ -1,0 +1,58 @@
+public class InMemoryCommandBus implements WriteBus<Command> {
+
+	private final Map<String,CommandHandler<? extends Command>> commands = new HashMap<>();
+	
+	public InMemoryCommandBus(List<CommandHandler<? extends Command>> handlers) {
+		for (CommandHandler<? extends Command> handler : handlers) {
+			commands.put(findCommandClass(handler).getCanonicalName(), handler);
+		}
+	}
+	
+
+	
+	
+	public void handle(Command command) {
+		CommandHandler<Command> foundHandler =  (CommandHandler<Command>) commands.get(command.getClass().getCanonicalName());
+		
+		if(foundHandler == null) {
+			
+		}
+		
+		foundHandler.handle(command);
+		
+	}
+	
+	
+    private Class<?> findCommandClass(CommandHandler<? extends Command> handler) {
+        Class <?> klass = handler.getClass();
+
+        for (Method method : klass.getMethods()) {
+            if (!method.getName().equals("handle"))
+                continue;
+
+            Class <?> parameterType = method.getParameterTypes()[0];
+
+            if (Command.class.isAssignableFrom(parameterType) && !parameterType.equals(Command.class)) {
+                return parameterType;
+            }
+        }
+
+        return null;
+    }
+
+
+It is a command bus in memory. Maps each class to its command with its CommandHandler
+
+InMemoryCommandBus(List<CommandHandler<? extends Command>> handlers)
+
+Uses the method findCommandClass(Because of reflection) To asociate each handler to its Command
+
+
+
+
+
+
+	
+
+	
+}
