@@ -1,0 +1,19 @@
+package strut_sdk.domain.query;
+
+public interface QueryHandler<T extends Query, R> {
+
+	R handle(T query);
+}
+
+
+It is an interface, so is a Contract
+
+Defines the contract that any class handling a particular query should follow.
+
+T: Query type
+R: Response Type
+
+Example:
+
+T Could be : PersonUpdateQuery
+R Could be: PersonResponse or Person 
