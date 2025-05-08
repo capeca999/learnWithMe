@@ -1,0 +1,65 @@
+Dependency Injection: Manual vs Spring
+
+Context
+In this project, we use a manual dependency injection system via the SimpleInjection class. This approach gives us full control but lacks the features and automation provided by mature frameworks like Spring.
+
+Below is a comparison between our current approach and how it would be implemented using Spring's dependency injection container.
+
+Our Manual System: SimpleInjection
+We use a lightweight service locator called SimpleInjection to register and retrieve dependencies.
+
+Example
+
+SimpleInjection container = new SimpleInjection();
+
+MyService myService = new MyService();
+container.register(MyService.class, myService);
+
+MyService resolved = container.resolve(MyService.class);
+
+
+
+
+Registration and resolution are manual.
+No lifecycle management or automatic wiring.
+Suitable for simple or lightweight environments.
+
+Spring Dependency Injection
+Spring uses annotations and a component scan mechanism to automatically manage and inject dependencies.
+
+Example
+
+@Component
+public class MyService {}
+
+@Component
+public class MyController {
+
+    private final MyService myService;
+
+    @Autowired
+    public MyController(MyService myService) {
+        this.myService = myService;
+    }
+}
+
+Objects are automatically created, injected, and managed by the Spring container.
+
+You don’t need to manually register or resolve anything.
+
+It supports lifecycle hooks, scopes, profiles, conditional beans, and more.
+
+Side-by-Side Comparison
+Feature	                              SimpleInjection (Manual)	                                            Spring Framework
+Registration	                        Manual (register(...))	                                              Automatic (@Component, @Bean)
+Dependency resolution    	            Manual (resolve(...))	                                                Automatic (@Autowired, constructor)
+Lifecycle management	                ❌ No	                                                              ✅ Yes (@PostConstruct, @PreDestroy)
+Component scanning	                  ❌ No                                                                 ✅ Yes (@ComponentScan)
+Bean scopes	                          ❌ No	                                                                 ✅ Yes (@Scope)
+Configuration & conditions            ❌ No	                                                                  ✅ Yes (@Conditional, @Profile)
+Aspect-Oriented Programming (AOP)	    ❌ No	                                                                ✅ Yes
+
+📝 Conclusion
+Our manual injection approach with SimpleInjection is simple and flexible, making it suitable for lightweight use cases or environments without a DI framework. However, for larger systems or when more advanced features are needed (e.g., scopes, lifecycle hooks, conditional beans), adopting Spring’s DI container would be more appropriate.
+
+If migrating to Spring in the future, each handler and service can be annotated with @Component, and buses can be injected using @Autowired or constructor injection.
