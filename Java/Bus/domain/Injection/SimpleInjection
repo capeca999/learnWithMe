@@ -1,0 +1,35 @@
+public class SimpleInjection {
+	
+		private static Map<Class<?>, Object> instances = new HashMap<>();
+
+		public <T> void register(Class<T> clazz, T instance) {
+			instances.put(clazz, instance);
+		}
+
+		public <T> T resolve(Class<T> clazz) {
+			return (T) instances.get(clazz);
+		}
+
+		
+		public List<Object> getInstances(){
+			return new ArrayList<Object>(instances.values());
+		}
+	
+	}
+
+Provides a manual dependency injection system, similar to a Service Locator. It is useful in environments where frameworks like Spring are not used.
+
+Key Methods:
+
+register(Class<T> clazz, T instance)
+Registers an instance for a given class.
+
+resolve(Class<T> clazz)
+Retrieves the registered instance, casting it to the expected type.
+
+getInstances()
+Returns a list of all registered instances.
+
+
+Notes:
+This container can be used to dynamically inject handlers into the InMemoryCommandBus or InMemoryQueryBus.
