@@ -1,0 +1,9 @@
+package com.bcm.strut_sdk.domain.bus;
+
+public interface ReadBus<T>{
+
+	public <R> R handle(T query);
+	
+}
+
+It defines a contract of a read bus. Encapsulates the logic in order to enroute querys to it's specific handler.
