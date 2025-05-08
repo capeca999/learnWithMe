@@ -1,0 +1,19 @@
+public class QueryBus implements ReadBus<Query> {
+
+	private ReadBus<Query> bus;
+	
+	public QueryBus(ReadBus<Query> readBus) {
+		this.bus = readBus;
+	}
+	
+	public <U> U handle(Query query) {
+		
+		return bus.handle(query);
+		
+	}
+}
+
+It is like a decorator to allow extensions (Loggin, etc) on the real bus
+
+
+
