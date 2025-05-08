@@ -1,0 +1,11 @@
+package strut_sdk.domain.command;
+
+public interface CommandHandler<T extends Command> {
+
+	void handle(T command);
+}
+
+
+This defines a "CONTRACT" in order to handle specific commands. Each implementation itself executes the business logic asociates to a command
+
+In a few words (Each commands executes it's handle)
