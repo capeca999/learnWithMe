@@ -1,0 +1,46 @@
+It is the implementation of ReadBus<Query>
+
+It is a Query bus in memory. It holds all the logic in order to ENROUTE a query to its QueryHandler
+
+
+public class InMemoryQueryBus implements ReadBus<Query> {
+	private final Map<String,QueryHandler<? extends Query, ?>> querys = new HashMap<>();
+
+	//Creates the internal MAP<String, QueryHandler> registering each handler using reflections to asociate the Query class to its handler
+	public InMemoryQueryBus(List<QueryHandler<? extends Query, ?>> handlers) {
+		for (QueryHandler<? extends Query, ?> handler : handlers) {
+			querys.put(findQueryClass(handler).getCanonicalName(), handler);
+		}
+	}
+	
+	//Search the handler with the name of the class of the query and executes it's handle.
+	public <R> R handle(Query query) {
+		QueryHandler<Query, R> foundHandler =  (QueryHandler<Query, R>) querys.get(query.getClass().getCanonicalName());
+
+		if (foundHandler == null) {
+			//TO-DO: throw exception
+			return null;
+		}
+		
+		return foundHandler.handle(query);
+		
+	}
+
+//Using reflections to discover which type of Query uses the handler, analazying the handle method
+    private Class<?> findQueryClass(QueryHandler<? extends Query, ?> handler) {
+        Class <?> klass = handler.getClass();
+
+        for (Method method : klass.getMethods()) {
+            if (!method.getName().equals("handle"))
+                continue;
+
+            Class <?> parameterType = method.getParameterTypes()[0];
+
+            if (Query.class.isAssignableFrom(parameterType) && !parameterType.equals(Query.class)) {
+                return parameterType;
+            }
+        }
+
+        return null;
+    }
+}
