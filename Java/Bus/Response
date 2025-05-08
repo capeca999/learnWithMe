@@ -1,0 +1,8 @@
+package strut_sdk.domain.query;
+
+public abstract class Response {
+
+  }
+
+It is a base class for the objects returnes in a Query. It does not implements logic but serves to standarize responses.
+
