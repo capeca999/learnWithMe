@@ -1,0 +1,16 @@
+Decorator to extend the functionality to the real bus
+
+public class CommandBus implements WriteBus<Command> {
+	
+	private WriteBus<Command> bus;
+	
+	public CommandBus(WriteBus<Command> inMemoryCommandBus) {
+		this.bus = inMemoryCommandBus;
+	}
+	
+	public void handle (Command command) {
+		bus.handle(command);
+    }
+}
+
+
